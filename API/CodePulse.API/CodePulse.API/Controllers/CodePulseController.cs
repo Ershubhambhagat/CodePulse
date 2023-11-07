@@ -20,7 +20,28 @@ namespace CodePulse.API.Controllers
 
 
         #region Get
-      
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+           var categoryData=await _categorRepository.GetAllAsync();
+            // _categorRepository only deal with domain model 
+            //never expose domain model 
+            //so we need to change on category domain model 
+            //map domain model to dto   
+
+            var Responce=new List<CategoryDTO>();   
+            foreach (var item in categoryData) 
+            {
+                Responce.Add(new CategoryDTO
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    UrlHandle = item.UrlHandle,
+                });
+            }
+            return Ok(Responce);
+
+        }
 
 
         #endregion
