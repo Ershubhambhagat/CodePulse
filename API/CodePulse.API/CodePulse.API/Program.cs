@@ -1,4 +1,6 @@
 using CodePulse.API.Data;
+using CodePulse.API.Reositories.Implementation;
+using CodePulse.API.Reositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContect>(Options =>
 {
     Options.UseSqlServer(builder.Configuration.GetConnectionString("CodePulseConnectionString"));
 });
+builder.Services.AddScoped<ICategorRepository ,CategoryRepository>();
 
 var app = builder.Build();
 
