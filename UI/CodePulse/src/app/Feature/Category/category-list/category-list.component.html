@@ -1,36 +1,35 @@
 <div class="container">
-    <h1 class="mt-3"> Category List </h1>
-    <div class="d-flex justify-content-end mt-3">
-        <a  [routerLink]="['/admin/category/add']" type="button" class="btn btn-primary">Primary</a>
-        
-    </div>
+  <h1 class="mt-3">Category List</h1>
+  <div class="d-flex justify-content-end mt-3">
+    <a
+      [routerLink]="['/admin/category/add']"
+      type="button"
+      class="btn btn-primary"
+      >Add Category</a
+    >
+  </div>
 
-    <ng-container *ngIf="categories$ |async as categoryes" >
-        <table class=" table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>UrlHandle</th>
-
-
-                </tr>
-
-            </thead> 
-            <tbody>
-
-                <tr *ngFor="let category1 of categoryes">
-                    <td>{{category1.id}}td</td>
-                    <td>{{category1.name}}</td>
-                    <td>{{category1.urlhandle}}</td>
-
-                </tr>
-            </tbody>
-
-        </table>
-     
-
-
-    </ng-container>
-    <ng-template #elseBlock>Content to render when condition is false.</ng-template>
-</div>  
+  <ng-container *ngIf="categories$ | async as categoryes; else elseBlock">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>UrlHandle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category1 of categoryes">
+          <td>{{ category1.id }}</td>
+          <td>{{ category1.name }}</td>
+          <td>{{ category1.UrlHandle }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #elseBlock
+    ><h1 class="mt-5" style="text-align: center;color: Red;background-color;">
+      Database Not Connected
+    </h1></ng-template
+  >
+</div>
