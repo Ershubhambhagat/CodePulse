@@ -25,6 +25,11 @@
           <td>{{ category1.name }}</td>
           <td>{{ category1.UrlHandle }}</td>
           <td><a class="btn btn-light" [routerLink]="['/admin/category/',category1.id ]">Edit</a></td>
+
+          <td>
+            <a class="btn btn-danger mt-3" (click)="onDelete(category1.id)
+            ">Delete</a>
+          </td>
         </tr>
       </tbody>
     </table>
