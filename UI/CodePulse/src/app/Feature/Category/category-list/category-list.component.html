@@ -16,6 +16,7 @@
           <th>Id</th>
           <th>Name</th>
           <th>UrlHandle</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -23,12 +24,13 @@
           <td>{{ category1.id }}</td>
           <td>{{ category1.name }}</td>
           <td>{{ category1.UrlHandle }}</td>
+          <td><a class="btn btn-light" [routerLink]="['/admin/category/',category1.id ]">Edit</a></td>
         </tr>
       </tbody>
     </table>
   </ng-container>
   <ng-template #elseBlock
-    ><h1 class="mt-5" style="text-align: center;color: Red;background-color;">
+    ><h1 class="mt-5" style="text-align: center;color: Red;">
       Database Not Connected
     </h1></ng-template
   >

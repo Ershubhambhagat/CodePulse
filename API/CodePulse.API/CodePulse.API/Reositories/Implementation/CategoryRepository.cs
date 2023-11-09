@@ -37,6 +37,14 @@ namespace CodePulse.API.Reositories.Implementation
         }
         #endregion
 
+        #region Get By id
+
+        public async Task<Category?> GetByIdAsync(Guid id)
+        {
+           return await _db.Categories.FirstOrDefaultAsync(c=>c.Id== id);
+        }
+        #endregion
+
 
 
     }

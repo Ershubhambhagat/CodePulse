@@ -18,3 +18,10 @@ need to implement oninit method to
 13 >
 14 >
 15 >
+
+
+
+
+1> Make func in  service 
+2> import service in component using ctor 
+3> 

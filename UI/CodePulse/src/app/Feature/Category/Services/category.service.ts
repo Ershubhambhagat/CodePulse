@@ -27,4 +27,13 @@ export class CategoryService {
   }
 
   //#endregion
+
+  //#region get by id
+  getCategoryById(id: string): Observable<Getcategory> {
+    return this.http.get<Getcategory>(
+      `${environment.apiBaseUrl}/api/Codepulse/${id}`
+    );
+  }
+
+  //#endregion
 }
