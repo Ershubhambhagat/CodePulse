@@ -15,8 +15,18 @@
                     [(ngModel)]="model.shortDescription" />
             </div>
 
-            <div class="mt-3">
+            <div  class="mt-3">
                 <label for="Content" class="form-label">Content</label>
+<div class="d-flex flex-row">
+
+    <div class="col-6 p-2">
+        <textarea id="Content" name="Content" class="form-control" style="height: 350px;max-height: 350px;"  [(ngModel)]="model.content"></textarea>
+    </div>
+    <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll;"> <markdown [data]="model.content"></markdown> </div>
+
+
+</div>
+
                 <input type="text" id="Content" name="content" class="form-control" [(ngModel)]="model.content" />
             </div>
 
@@ -24,6 +34,13 @@
             <div class="mt-3">
 
                 <label for="FeaturedImageUrl" class="form-label">FeaturedImageUrl</label>
+
+<<ng-container *ngIf="model.featuredImageUrl !==''">
+<div>
+    <img  [src]="model.featuredImageUrl"[height]="100" class="my-2">
+</div>
+</ng-container>
+
                 <input type="text" id="FeaturedImageUrl" name="featuredImageUrl" class="form-control"
                     [(ngModel)]="model.featuredImageUrl" />
             </div>
