@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="justify-content-between"> Blog Post List</h1>
+    <div class="d-grid justify-content-end mt-3">
+        <a [routerLink]="['/admin/blogpost/add']" class="btn btn-primary">Add BlogPost</a>
+    </div>
+
+    <ng-container *ngIf="blogpost$ |async as blogpost">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Short Description</th>
+                    <th>Is Visible</th>
+                    <th>Content</th>
+                    <th>FeaturedImageUrl</th>
+                    <th>UrlHandle</th>
+                    <th>PublishedDate</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let blogpost of blogpost">
+                    <td>{{blogpost.title}}</td>
+                    <td>{{blogpost.shortDescription}}</td>
+                    <td>{{blogpost.isVisible}}</td>
+                    <td>{{blogpost.content}}</td>
+                    <td>{{blogpost.featuredImageUrl}}</td>
+                    <td>{{blogpost.urlHandle}}</td>
+                    <td>{{blogpost.publishDate}}</td>
+                    <td>{{blogpost.author}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </ng-container>
+</div>

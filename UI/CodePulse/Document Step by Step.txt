@@ -1,3 +1,5 @@
+.log
+
 #---------------------------------For Get All---------------------------------------# 
 Link :https://www.dotnetperls.com/s#c#
 
@@ -25,3 +27,6 @@ need to implement oninit method to
 1> Make func in  service 
 2> import service in component using ctor 
 3> 
+
+
+15-11-2023

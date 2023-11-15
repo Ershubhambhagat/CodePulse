@@ -9,13 +9,17 @@ import { AddCategoryComponent } from './Feature/Category/add-category/add-catego
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule } from '@angular/common/http';
 import { EditCategoryComponent } from './Feature/Category/edit-category/edit-category.component';
+import { AddBlogPostComponent } from './Feature/Blog-Post/add-blog-post/add-blog-post.component';
+import { BlogPostListComponent } from './Feature/Blog-Post/blog-post-list/blog-post-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CategoryListComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    AddBlogPostComponent,
+    BlogPostListComponent,
   ],
   imports: [
     BrowserModule,
