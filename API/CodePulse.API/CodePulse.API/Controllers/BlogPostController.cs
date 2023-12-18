@@ -1,4 +1,5 @@
 ﻿using CodePulse.API.Model.Domain;
+using CodePulse.API.Model.DTOs;
 using CodePulse.API.Model.DTOs.BlogPostDTOs;
 using CodePulse.API.Reositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace CodePulse.API.Controllers
     public class BlogPostController : Controller
     {
         private readonly IBlogPostRepository _blogPost;
+        private readonly ICategorRepository _categorRepository;
 
-        public BlogPostController(IBlogPostRepository blogPost)
+        public BlogPostController(IBlogPostRepository blogPost, ICategorRepository categorRepository)
         {
             _blogPost = blogPost;
+            _categorRepository = categorRepository;
         }
 
 
@@ -36,13 +39,23 @@ namespace CodePulse.API.Controllers
                 IsVisiblebool = Request.IsVisiblebool,
                 ShortDescription = Request.ShortDescription,
                 PublishedDate = Request.PublishedDate,
-                UrlHandle = Request.UrlHandle
-
+                UrlHandle = Request.UrlHandle,
+                Categories = new List<Category>()
             };
+
+            foreach (var categoryGuid in Request.Categories)
+            {
+                var existingCategory = await _categorRepository.GetByIdAsync(categoryGuid);
+                if (existingCategory != null)
+                {
+                    blogpost.Categories.Add(existingCategory);
+                }
+
+            }
             blogpost = await _blogPost.CreateAsync(blogpost);
 
             //conver Domain model back To DTOs
-            var responce = new Model.DTOs.BlogPostDTOs.BlogPostAllDTOs
+            var responce = new BlogPostAllDTOs
             {
                 Id = blogpost.Id,
                 Title = blogpost.Title,
@@ -52,14 +65,23 @@ namespace CodePulse.API.Controllers
                 IsVisiblebool = blogpost.IsVisiblebool,
                 ShortDescription = blogpost.ShortDescription,
                 PublishedDate = blogpost.PublishedDate,
-                UrlHandle = blogpost.UrlHandle
+                UrlHandle = blogpost.UrlHandle,
+                categories = blogpost.Categories.Select(x => new CategoryDTO
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+
+
+                }).ToList()
+
             };
             return Ok(responce);
         }
         #endregion
 
 
-        #region Fetch
+        #region Get ALL
         [HttpGet]
         public async Task<IActionResult> GetAlPostlBlog()
         {
@@ -78,7 +100,14 @@ namespace CodePulse.API.Controllers
                     IsVisiblebool = blogpost.IsVisiblebool,
                     ShortDescription = blogpost.ShortDescription,
                     PublishedDate = blogpost.PublishedDate,
-                    UrlHandle = blogpost.UrlHandle
+                    UrlHandle = blogpost.UrlHandle,
+                    categories=blogpost.Categories.Select(x => new CategoryDTO
+                    {
+                        Id= x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle
+                    }).ToList()
+                   
                 });
             }
             return Ok(responce);

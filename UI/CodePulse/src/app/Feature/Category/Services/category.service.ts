@@ -23,7 +23,7 @@ export class CategoryService {
   //#region  Get All
   getAllCategory(): Observable<Getcategory[]> {
     return this.http.get<Getcategory[]>(
-      `${environment.apiBaseUrl}/api/Codepulse`
+      `${environment.apiBaseUrl}/api/CodePulse`
     );
   }
 
@@ -32,7 +32,7 @@ export class CategoryService {
   //#region get by id
   getCategoryById(id: string): Observable<Getcategory> {
     return this.http.get<Getcategory>(
-      `${environment.apiBaseUrl}/api/Codepulse/${id}`
+      `${environment.apiBaseUrl}/api/CodePulse/${id}`
     );
   }
 

@@ -27,14 +27,14 @@ namespace CodePulse.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
-           var categoryData=await _categorRepository.GetAllAsync();
+            var categoryData = await _categorRepository.GetAllAsync();
             // _categorRepository only deal with domain model 
             //never expose domain model 
             //so we need to change on category domain model 
             //map domain model to dto   
 
-            var Responce=new List<CategoryDTO>();   
-            foreach (var item in categoryData) 
+            var Responce = new List<CategoryDTO>();
+            foreach (var item in categoryData)
             {
                 Responce.Add(new CategoryDTO
                 {
@@ -74,10 +74,10 @@ namespace CodePulse.API.Controllers
         #region Get By Id
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> GetCategoryById([FromRoute]Guid id) 
+        public async Task<IActionResult> GetCategoryById([FromRoute] Guid id)
         {
-          var category=  await _categorRepository.GetByIdAsync(id);
-            if(category == null)
+            var category = await _categorRepository.GetByIdAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
@@ -88,13 +88,25 @@ namespace CodePulse.API.Controllers
                 UrlHandle = category.UrlHandle,
             };
             return Ok(categ);
-          
-        
+
+
         }
-       
+
 
 
         #endregion
+        [HttpDelete]
+        [Route("{id:Guid}")]
+
+        #region Delete
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+        {
+            await _categorRepository.DeleteAsync(id);
+            return Ok(id);
+        }
+
+        #endregion
+
 
     }
 

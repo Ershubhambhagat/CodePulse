@@ -37,7 +37,7 @@ namespace CodePulse.API.Reositories.Implementation
 
         public async Task<IEnumerable<BlogPost>> GetAllBlogPostAsync()
         {
-            return await _dbContect.Blogposts.ToListAsync();
+            return await _dbContect.Blogposts.Include(x=>x.Categories).ToListAsync();
         }
         #endregion
 
